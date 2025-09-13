@@ -42,8 +42,8 @@ target_link_directories(robot_shared_unitree_sdk2 INTERFACE
 target_link_libraries(robot_shared_unitree_sdk2 INTERFACE unitree_sdk2)
 
 # ========== Westlake Cyclone SDK ==========
-add_library(robot_shared_westlake INTERFACE)
-target_include_directories(robot_shared_westlake INTERFACE
+add_library(robot_shared_westlake_cyclonedds_sdk INTERFACE)
+target_include_directories(robot_shared_westlake_cyclonedds_sdk INTERFACE
     ${CMAKE_CURRENT_SOURCE_DIR}/library/wlrobot_cyclone_sdk/include
 )
 
