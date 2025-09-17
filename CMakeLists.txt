@@ -31,6 +31,16 @@ target_link_directories(robot_shared_cyclonedds INTERFACE
 )
 target_link_libraries(robot_shared_cyclonedds INTERFACE ddscxx ddsc)
 
+# ========== FastDDS ==========
+add_library(robot_shared_fastdds INTERFACE)
+target_include_directories(robot_shared_fastdds INTERFACE
+    ${CMAKE_CURRENT_SOURCE_DIR}/library/fastdds/include
+)
+target_link_directories(robot_shared_fastdds INTERFACE
+    ${CMAKE_CURRENT_SOURCE_DIR}/library/fastdds/lib/${CMAKE_SYSTEM_PROCESSOR}
+)
+target_link_libraries(robot_shared_fastdds INTERFACE fastdds)
+
 # ========== Unitree SDK2 ==========
 add_library(robot_shared_unitree_sdk2 INTERFACE)
 target_include_directories(robot_shared_unitree_sdk2 INTERFACE
@@ -45,5 +55,11 @@ target_link_libraries(robot_shared_unitree_sdk2 INTERFACE unitree_sdk2)
 add_library(robot_shared_westlake_cyclonedds_sdk INTERFACE)
 target_include_directories(robot_shared_westlake_cyclonedds_sdk INTERFACE
     ${CMAKE_CURRENT_SOURCE_DIR}/library/wlrobot_cyclone_sdk/include
+)
+
+# ========== Westlake fastdds SDK ==========
+add_library(robot_shared_westlake_fastdds_sdk INTERFACE)
+target_include_directories(robot_shared_westlake_fastdds_sdk INTERFACE
+    ${CMAKE_CURRENT_SOURCE_DIR}/library/wlrobot_fast_sdk/include
 )
 

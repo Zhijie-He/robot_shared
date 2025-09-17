@@ -1,0 +1,24 @@
+module wlrobot {
+  module msg {
+    struct JoystickMsg {
+      float lx;
+      float ly;
+      float rx;
+      float ry;
+      float lt;
+      float rt;
+
+      boolean a;
+      boolean b;
+      boolean x;
+      boolean y;
+      boolean start;
+      boolean select;
+      boolean l1;
+      boolean r1;
+      boolean l3;
+      boolean r3;
+    };
+  };
+};
+
