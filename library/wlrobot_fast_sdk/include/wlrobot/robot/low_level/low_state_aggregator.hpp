@@ -14,21 +14,19 @@
 #include <wlrobot/idl/hd/JoystickMsgPubSubTypes.hpp>
 #include <wlrobot/idl/hd/LowStatePubSubTypes.hpp>
 
-#include "config/BaseRobotConfig.h"
-
 namespace wlrobot::robot {
 
 class LowStateAggregator {
 public:
-    LowStateAggregator(std::shared_ptr<const BaseRobotConfig> cfg)
-        : imu_topic_(cfg->imu_topic),
-          motor_topic_(cfg->motor_topic),
-          joystick_topic_(cfg->joystick_topic),
-          lowstate_topic_(cfg->lowstate_topic),
-          publish_interval_ms_(1000 / cfg->lowstate_pub_hz),
-          domain_id_(cfg->domain_id),
-          real2sim_dof_map_(cfg->real2sim_dof_map),
-          zero_offset_(cfg->zero_offset)
+    LowStateAggregator(const std::string imu_topic, const std::string motor_topic, const std::string joystick_topic, const std::string lowstate_topic, int lowstate_pub_hz, int domain_id, const std::array<int, 12>& real2sim_dof_map, const std::array<std::array<float, 3>, 4>& zero_offset)
+        : imu_topic_(imu_topic),
+          motor_topic_(motor_topic),
+          joystick_topic_(joystick_topic),
+          lowstate_topic_(lowstate_topic),
+          publish_interval_ms_(1000 / lowstate_pub_hz),
+          domain_id_(domain_id),
+          real2sim_dof_map_(real2sim_dof_map),
+          zero_offset_(zero_offset)
     {
 
     }
@@ -71,4 +69,3 @@ private:
 };
 
 }  // namespace wlrobot::robot
-

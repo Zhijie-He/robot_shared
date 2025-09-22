@@ -39,7 +39,7 @@ target_include_directories(robot_shared_fastdds INTERFACE
 target_link_directories(robot_shared_fastdds INTERFACE
     ${CMAKE_CURRENT_SOURCE_DIR}/library/fastdds/lib/${CMAKE_SYSTEM_PROCESSOR}
 )
-target_link_libraries(robot_shared_fastdds INTERFACE fastdds)
+target_link_libraries(robot_shared_fastdds INTERFACE fastdds fastcdr)
 
 # ========== Unitree SDK2 ==========
 add_library(robot_shared_unitree_sdk2 INTERFACE)
@@ -58,8 +58,15 @@ target_include_directories(robot_shared_westlake_cyclonedds_sdk INTERFACE
 )
 
 # ========== Westlake fastdds SDK ==========
-add_library(robot_shared_westlake_fastdds_sdk INTERFACE)
-target_include_directories(robot_shared_westlake_fastdds_sdk INTERFACE
+file(GLOB_RECURSE WESTLAKE_SOURCES CONFIGURE_DEPENDS
+    ${CMAKE_CURRENT_SOURCE_DIR}/library/wlrobot_fast_sdk/src/*.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/library/wlrobot_fast_sdk/src/*.c
+)
+add_library(robot_shared_westlake_fastdds_sdk STATIC ${WESTLAKE_SOURCES})
+target_include_directories(robot_shared_westlake_fastdds_sdkb PUBLIC
     ${CMAKE_CURRENT_SOURCE_DIR}/library/wlrobot_fast_sdk/include
+)
+target_link_libraries(robot_shared_westlake_fastdds_sdk PRIVATE
+    robot_shared_fastdds
 )
 
