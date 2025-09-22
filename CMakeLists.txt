@@ -63,10 +63,8 @@ file(GLOB_RECURSE WESTLAKE_SOURCES CONFIGURE_DEPENDS
     ${CMAKE_CURRENT_SOURCE_DIR}/library/wlrobot_fast_sdk/src/*.c
 )
 add_library(robot_shared_westlake_fastdds_sdk STATIC ${WESTLAKE_SOURCES})
-target_include_directories(robot_shared_westlake_fastdds_sdkb PUBLIC
+target_include_directories(robot_shared_westlake_fastdds_sdk PUBLIC
     ${CMAKE_CURRENT_SOURCE_DIR}/library/wlrobot_fast_sdk/include
 )
-target_link_libraries(robot_shared_westlake_fastdds_sdk PRIVATE
-    robot_shared_fastdds
-)
+target_link_libraries(robot_shared_westlake_fastdds_sdk PRIVATE robot_shared_fastdds)
 
