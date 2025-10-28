@@ -83,3 +83,22 @@ target_include_directories(robot_shared_westlake_fastdds_sdk PUBLIC
 )
 target_link_libraries(robot_shared_westlake_fastdds_sdk PRIVATE robot_shared_fastdds)
 endif()
+
+# ========== Hasp Encryption SDK ==========
+if(USE_ENCRYPTION)
+file(GLOB_RECURSE HASP_SOURCES CONFIGURE_DEPENDS
+    ${CMAKE_CURRENT_SOURCE_DIR}/library/hasp/src/*.cpp
+)
+add_library(robot_shared_encryption STATIC ${HASP_SOURCES})
+target_include_directories(robot_shared_encryption PUBLIC
+    ${CMAKE_CURRENT_SOURCE_DIR}/library/hasp/include
+)
+target_link_directories(robot_shared_encryption PUBLIC
+    ${CMAKE_CURRENT_SOURCE_DIR}/library/hasp/lib/${CMAKE_SYSTEM_PROCESSOR}
+)
+target_link_libraries(robot_shared_encryption PRIVATE
+    hasp_cpp
+    hasp_36478
+    pthread
+)
+endif()
