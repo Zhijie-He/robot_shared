@@ -102,3 +102,15 @@ target_link_libraries(robot_shared_encryption PRIVATE
     pthread
 )
 endif()
+
+# ========== YAML ==========
+if(USE_YAML)
+add_library(robot_shared_yaml INTERFACE)
+target_include_directories(robot_shared_yaml INTERFACE
+    ${CMAKE_CURRENT_SOURCE_DIR}/library/yaml/include
+)
+target_link_directories(robot_shared_yaml INTERFACE
+    ${CMAKE_CURRENT_SOURCE_DIR}/library/yaml/lib/${CMAKE_SYSTEM_PROCESSOR}
+)
+target_link_libraries(robot_shared_yaml INTERFACE yaml-cpp)
+endif()
