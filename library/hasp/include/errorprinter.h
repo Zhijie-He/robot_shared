@@ -4,6 +4,7 @@
 #define ERRORPRINTER_H
 
 #include <map>
+#include "utility/logger.h"
 
 class ErrorPrinter
 {

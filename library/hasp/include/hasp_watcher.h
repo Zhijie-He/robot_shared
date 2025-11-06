@@ -25,8 +25,9 @@ public:
         status_ = hasp_->login((hasp_vendor_code_t)vendorCode, scope_);
 
         if (!HASP_SUCCEEDED(status_)) {
-            std::cerr << "[HaspWatcher] Login failed, status=0x"
-                      << std::hex << status_ << std::endl;
+            // std::cerr << "[HaspWatcher] Login failed, status=0x"
+            //           << std::hex << status_ << std::endl;
+            // FRC_ERROR("[HaspWatcher.start] Login failed, status=0x");
             errorPrinter_.printError(status_);
             return false;
         }
@@ -77,16 +78,18 @@ private:
 
             if (HASP_SUCCEEDED(status_)) {
                 if (!license_valid_) {
-                    std::cout << "[HaspWatcher] License restored.\n";
+                    // std::cout << "[HaspWatcher] License restored.\n";
+                    FRC_HIGHLIGHT("[HaspWatcher.monitorLoop] WestLake protection key restored.");
                     license_valid_ = true;
                 }
             } else {
-                if (license_valid_) {
-                    std::cerr << "[HaspWatcher] License lost! status=0x"
-                              << std::hex << status_ << std::endl;
-                    errorPrinter_.printError(status_);
+                // if (license_valid_) {
+                    // std::cerr << "[HaspWatcher] License lost! status=0x"
+                    //           << std::hex << status_ << std::endl;
+                    FRC_WARN("[HaspWatcher.monitorLoop] WestLake protection key lost!");
+                    // errorPrinter_.printError(status_);
                     license_valid_ = false;
-                }
+                // }
             }
         }
     }

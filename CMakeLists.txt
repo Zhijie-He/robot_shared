@@ -92,6 +92,7 @@ file(GLOB_RECURSE HASP_SOURCES CONFIGURE_DEPENDS
 add_library(robot_shared_encryption STATIC ${HASP_SOURCES})
 target_include_directories(robot_shared_encryption PUBLIC
     ${CMAKE_CURRENT_SOURCE_DIR}/library/hasp/include
+    ${CMAKE_CURRENT_SOURCE_DIR}/include
 )
 target_link_directories(robot_shared_encryption PUBLIC
     ${CMAKE_CURRENT_SOURCE_DIR}/library/hasp/lib/${CMAKE_SYSTEM_PROCESSOR}
