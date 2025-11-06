@@ -16,9 +16,7 @@
 #endif
 
 // 🧠 是否启用 DEBUG 输出（不定义则不会打印 DBG_INFO）
-#ifdef PRINT_INFO
-#define LOG_ENABLE_DEBUG 1
-#else
+#ifndef LOG_ENABLE_DEBUG
 #define LOG_ENABLE_DEBUG 0
 #endif
 
@@ -57,7 +55,7 @@ inline std::string current_time_str() {
 #if LOG_USE_PREFIX
   #define FRC_PREFIX(level, color) color "[" level " " << current_time_str() << " " << __FILE__ << ":" << __LINE__ << "] "
 #else
-  #define FRC_PREFIX(level, color) color
+  #define FRC_PREFIX(level, color) color "[" level "] "
 #endif
 
 // ✅ 日志宏定义
