@@ -51,6 +51,21 @@ inline std::string current_time_str() {
     return ss.str();
 }
 
+// 🧩 去除日志开头的 [xxx] 模块标签
+inline std::string strip_bracket_prefix(const std::string& msg) {
+#if !LOG_USE_PREFIX
+  if (!msg.empty() && msg[0] == '[') {
+    size_t end = msg.find(']');
+    if (end != std::string::npos && end + 1 < msg.size()) {
+      size_t start = end + 1;
+      if(msg[start] == ' ') ++start;
+      return msg.substr(start);  // 去掉 [xxx]
+    }
+  }
+#endif
+  return msg;
+}
+
 // 📦 日志前缀
 #if LOG_USE_PREFIX
   #define FRC_PREFIX(level, color) color "[" level " " << current_time_str() << " " << __FILE__ << ":" << __LINE__ << "] "
@@ -60,15 +75,29 @@ inline std::string current_time_str() {
 
 // ✅ 日志宏定义
 // ------------------------ 日志宏定义 ------------------------
-#define FRC_INFO(x)      std::cout << FRC_PREFIX("INFO",    COLOR_INFO)     << x << COLOR_RESET << std::endl
-#define FRC_WARN(x)      std::cout << FRC_PREFIX("WARN",    COLOR_WARN)     << x << COLOR_RESET << std::endl
-#define FRC_ERROR(x)     std::cerr << FRC_PREFIX("ERROR",   COLOR_ERROR)    << x << COLOR_RESET << std::endl
-#define FRC_SUCCESS(x)   std::cout << FRC_PREFIX("SUCCESS", COLOR_SUCCESS)  << x << COLOR_RESET << std::endl
-#define FRC_HIGHLIGHT(x) std::cout << FRC_PREFIX("HIGHLIGHT", COLOR_HIGHLIGHT) << x << COLOR_RESET << std::endl
-#define FRC_CRITICAL(x)  std::cerr << FRC_PREFIX("CRITICAL", COLOR_CRITICAL) << x << COLOR_RESET << std::endl
+// #define FRC_INFO(x)      std::cout << FRC_PREFIX("INFO",    COLOR_INFO)     << strip_bracket_prefix(x) << COLOR_RESET << std::endl
+// #define FRC_WARN(x)      std::cout << FRC_PREFIX("WARN",    COLOR_WARN)     << strip_bracket_prefix(x) << COLOR_RESET << std::endl
+// #define FRC_ERROR(x)     std::cerr << FRC_PREFIX("ERROR",   COLOR_ERROR)    << strip_bracket_prefix(x) << COLOR_RESET << std::endl
+// #define FRC_SUCCESS(x)   std::cout << FRC_PREFIX("SUCCESS", COLOR_SUCCESS)  << strip_bracket_prefix(x) << COLOR_RESET << std::endl
+// #define FRC_HIGHLIGHT(x) std::cout << FRC_PREFIX("HIGHLIGHT", COLOR_HIGHLIGHT) << strip_bracket_prefix(x) << COLOR_RESET << std::endl
+// #define FRC_CRITICAL(x)  std::cerr << FRC_PREFIX("CRITICAL", COLOR_CRITICAL) << strip_bracket_prefix(x) << COLOR_RESET << std::endl
+
+// #if LOG_ENABLE_DEBUG
+//   #define DBG_INFO(x)  std::cout << FRC_PREFIX("DEBUG", COLOR_DEBUG) << strip_bracket_prefix(x) << COLOR_RESET << std::endl
+// #else
+//   #define DBG_INFO(x)
+// #endif
+
+// ✅ 日志宏定义（增强版，支持 << 表达式 + 自动去掉 [xxx]）
+#define FRC_INFO(x)      do { std::ostringstream _os; _os << x; std::cout << FRC_PREFIX("INFO", COLOR_INFO)     << strip_bracket_prefix(_os.str()) << COLOR_RESET << std::endl; } while(0)
+#define FRC_WARN(x)      do { std::ostringstream _os; _os << x; std::cout << FRC_PREFIX("WARN", COLOR_WARN)     << strip_bracket_prefix(_os.str()) << COLOR_RESET << std::endl; } while(0)
+#define FRC_ERROR(x)     do { std::ostringstream _os; _os << x; std::cerr << FRC_PREFIX("ERROR", COLOR_ERROR)   << strip_bracket_prefix(_os.str()) << COLOR_RESET << std::endl; } while(0)
+#define FRC_SUCCESS(x)   do { std::ostringstream _os; _os << x; std::cout << FRC_PREFIX("SUCCESS", COLOR_SUCCESS) << strip_bracket_prefix(_os.str()) << COLOR_RESET << std::endl; } while(0)
+#define FRC_HIGHLIGHT(x) do { std::ostringstream _os; _os << x; std::cout << FRC_PREFIX("HIGHLIGHT", COLOR_HIGHLIGHT) << strip_bracket_prefix(_os.str()) << COLOR_RESET << std::endl; } while(0)
+#define FRC_CRITICAL(x)  do { std::ostringstream _os; _os << x; std::cerr << FRC_PREFIX("CRITICAL", COLOR_CRITICAL) << strip_bracket_prefix(_os.str()) << COLOR_RESET << std::endl; } while(0)
 
 #if LOG_ENABLE_DEBUG
-  #define DBG_INFO(x)  std::cout << FRC_PREFIX("DEBUG", COLOR_DEBUG) << x << COLOR_RESET << std::endl
+  #define DBG_INFO(x)    do { std::ostringstream _os; _os << x; std::cout << FRC_PREFIX("DEBUG", COLOR_DEBUG)   << strip_bracket_prefix(_os.str()) << COLOR_RESET << std::endl; } while(0)
 #else
   #define DBG_INFO(x)
 #endif
