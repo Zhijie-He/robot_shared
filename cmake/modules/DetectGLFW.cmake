@@ -1,0 +1,17 @@
+# robot_shared/cmake/modules/DetectGLFW.cmake
+include_guard(GLOBAL)
+include(${CMAKE_CURRENT_LIST_DIR}/../core/ColorMessage.cmake)
+
+if (USE_GLFW)
+    find_package(glfw3 QUIET)
+    if (glfw3_FOUND OR GLFW_FOUND)
+        set(USE_GLFW ON)
+        color_message(STATUS cyan "[INFO] GLFW found")
+    else()
+        set(USE_GLFW OFF)
+        color_message(STATUS yellow "[WARN] GLFW not found - disable GLFW support")
+    endif()
+else()
+    set(USE_GLFW OFF)
+    color_message(STATUS cyan "[INFO] GLFW manually disabled.")
+endif()

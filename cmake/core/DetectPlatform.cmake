@@ -2,8 +2,8 @@
 # robot_shared/cmake/DetectPlatform.cmake
 # Detect current OS, architecture, and platform profile
 # ======================================================================
-
 include_guard(GLOBAL)
+include(${CMAKE_CURRENT_LIST_DIR}/ColorMessage.cmake)
 
 if(CMAKE_SYSTEM_NAME MATCHES "Darwin")
     set(CURRENT_PLATFORM "macos")

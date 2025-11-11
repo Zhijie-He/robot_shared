@@ -1,10 +1,8 @@
 # robot_shared/cmake/AddressSanitizer.cmake
-include_guard(GLOBAL) # avoid repeat include
-
-include(ColorMessage) # 依赖彩色输出
+include_guard(GLOBAL) 
+include(${CMAKE_CURRENT_LIST_DIR}/ColorMessage.cmake)
 
 option(ENABLE_ASAN "Enable AddressSanitizer" OFF)
-
 if (ENABLE_ASAN)
     color_message(STATUS cyan "[INFO] AddressSanitizer enabled")
     set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fsanitize=address -g -O1")

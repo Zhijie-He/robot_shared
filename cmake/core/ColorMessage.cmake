@@ -1,6 +1,8 @@
 # robot_shared/cmake/ColorMessage.cmake
-option(ENABLE_COLOR_LOG "Enable colorized message output" ON)
+include_guard(GLOBAL)
+include(${CMAKE_CURRENT_LIST_DIR}/ColorMessage.cmake)
 
+option(ENABLE_COLOR_LOG "Enable colorized message output" ON)
 function(color_message TYPE COLOR TEXT)
     if(NOT ENABLE_COLOR_LOG)
         message(${TYPE} "${TEXT}")
