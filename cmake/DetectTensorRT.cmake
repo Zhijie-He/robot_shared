@@ -1,12 +1,21 @@
 # DetectTensorRT.cmake
 include_guard(GLOBAL)
 
-set(USE_TENSORRT OFF)
-set(NVINFER_MAJOR 0)
+# 默认开启 TensorRT，除非用户显式关闭
+if(NOT DEFINED USE_TENSORRT)
+    set(USE_TENSORRT ON)
+endif()
 
+# 如果被用户禁用，则直接退出
+if(NOT USE_TENSORRT)
+    color_message(STATUS cyan "[INFO] TensorRT manually disabled.")
+    return()
+endif()
+
+set(NVINFER_MAJOR 0)
 if(DEFINED TENSORRT_DIR)
     set(USE_TENSORRT ON)
-    add_compile_definitions(USE_TENSORRT)
+    add_compil_definitions(USE_TENSORRT)
     color_message(STATUS cyan "[INFO] USE_TENSORRT: ${USE_TENSORRT} (${TENSORRT_DIR})")
     
     # 平台区分
@@ -34,4 +43,3 @@ else()
     set(USE_TENSORRT OFF)
     color_message(STATUS cyan "[INFO] USE_TENSORRT: ${USE_TENSORRT} (TENSORRT_DIR not set or invalid ${TENSORRT_DIR})")
 endif()
-
