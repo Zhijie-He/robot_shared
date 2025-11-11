@@ -83,13 +83,13 @@ private:
                     license_valid_ = true;
                 }
             } else {
-                // if (license_valid_) {
+                if (license_valid_) {
                     // std::cerr << "[HaspWatcher] License lost! status=0x"
                     //           << std::hex << status_ << std::endl;
                     FRC_WARN("[HaspWatcher.monitorLoop] WestLake protection key lost!");
                     // errorPrinter_.printError(status_);
                     license_valid_ = false;
-                // }
+                }
             }
         }
     }
