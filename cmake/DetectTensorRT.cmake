@@ -1,4 +1,4 @@
-# DetectTensorRT.cmake
+# robot_shared/cmake/DetectTensorRT.cmake
 include_guard(GLOBAL)
 
 # 默认开启 TensorRT，除非用户显式关闭
@@ -15,7 +15,7 @@ endif()
 set(NVINFER_MAJOR 0)
 if(DEFINED TENSORRT_DIR)
     set(USE_TENSORRT ON)
-    add_compil_definitions(USE_TENSORRT)
+    add_compile_definitions(USE_TENSORRT)
     color_message(STATUS cyan "[INFO] USE_TENSORRT: ${USE_TENSORRT} (${TENSORRT_DIR})")
     
     # 平台区分

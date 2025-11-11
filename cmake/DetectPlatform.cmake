@@ -1,5 +1,5 @@
 # ======================================================================
-# DetectPlatform.cmake
+# robot_shared/cmake/DetectPlatform.cmake
 # Detect current OS, architecture, and platform profile
 # ======================================================================
 
