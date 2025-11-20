@@ -3,6 +3,15 @@ include_guard(GLOBAL)
 include(${CMAKE_CURRENT_LIST_DIR}/../core/ColorMessage.cmake)
 
 set(TENSORRT_DIR $ENV{TENSORRT_DIR}) 
+
+# 如果是 Jetson (linux-aarch64) 且 环境变量未设置 → 自动指定默认路径
+if(NOT DEFINED TENSORRT_DIR OR TENSORRT_DIR STREQUAL "")
+    if(CURRENT_PLATFORM STREQUAL "linux-aarch64")
+        set(TENSORRT_DIR "/usr/src/tensorrt")
+        color_message(STATUS cyan "[INFO] Auto-set TENSORRT_DIR to ${TENSORRT_DIR} for Jetson (aarch64)")
+    endif()
+endif()
+
 # 默认开启 TensorRT，除非用户显式关闭
 if(NOT DEFINED USE_TENSORRT)
     set(USE_TENSORRT ON)
