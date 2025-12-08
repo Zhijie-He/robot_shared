@@ -79,14 +79,14 @@ private:
             if (HASP_SUCCEEDED(status_)) {
                 if (!license_valid_) {
                     // std::cout << "[HaspWatcher] License restored.\n";
-                    FRC_HIGHLIGHT("[HaspWatcher.monitorLoop] WestLake protection key restored.");
+                    FRC_HIGHLIGHT("[HaspWatcher.monitorLoop] predefine:protection_key_restored");
                     license_valid_ = true;
                 }
             } else {
                 if (license_valid_) {
                     // std::cerr << "[HaspWatcher] License lost! status=0x"
                     //           << std::hex << status_ << std::endl;
-                    FRC_WARN("[HaspWatcher.monitorLoop] WestLake protection key lost!");
+                    FRC_WARN("[HaspWatcher.monitorLoop] predefine:protection_key_lost");
                     // errorPrinter_.printError(status_);
                     license_valid_ = false;
                 }

@@ -38,6 +38,10 @@ static const std::unordered_map<std::string, std::string> EN = {
     {"predefine:gamepad_x_release",            "Gamepad X on release, set flags to ones!"},
     {"predefine:keyboard_listener_terminated", "Keyboard listening thread terminated"},
     {"predefine:robot_disconnected_lowstate_timeout", "Robot disconnected (LowState timeout)!"},
+    {"predefine:protection_key_not_found", "WestLake protection key was not found"},
+    {"predefine:license_check_failed", "License check failed, exiting ..."},
+    {"predefine:protection_key_restored", "WestLake protection key restored."},
+    {"predefine:protection_key_lost", "WestLake protection key lost!"},
 };
 
 
@@ -75,7 +79,17 @@ static const std::unordered_map<std::string, std::string> ZH = {
     {"predefine:gamepad_x_release",            "按钮 X 松开，开启跟随模式！"},
     {"predefine:keyboard_listener_terminated", "键盘监听线程已结束。"},
     {"predefine:robot_disconnected_lowstate_timeout", "机器人已断开连接（LowState 超时）！"},
+    {"predefine:protection_key_not_found", "未找到 WestLake 保护密钥。"},
+    {"predefine:license_check_failed", "许可证检查失败，程序即将退出。"},
+    {"predefine:protection_key_restored", "WestLake 保护密钥已恢复。"},
+    {"predefine:protection_key_lost", "WestLake 保护密钥丢失！"},
 };
 } // namespace TranslationData
+
+
+
+
+ 
+
 
 
