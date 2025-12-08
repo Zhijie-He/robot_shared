@@ -4,6 +4,7 @@
 #include <sstream>
 #include <ctime>
 #include <iomanip>
+#include "translation.hpp"
 
 // 🧠 是否启用彩色输出
 #ifndef LOG_USE_COLOR
@@ -73,31 +74,19 @@ inline std::string strip_bracket_prefix(const std::string& msg) {
   #define FRC_PREFIX(level, color) color "[" level "] "
 #endif
 
-// ✅ 日志宏定义
-// ------------------------ 日志宏定义 ------------------------
-// #define FRC_INFO(x)      std::cout << FRC_PREFIX("INFO",    COLOR_INFO)     << strip_bracket_prefix(x) << COLOR_RESET << std::endl
-// #define FRC_WARN(x)      std::cout << FRC_PREFIX("WARN",    COLOR_WARN)     << strip_bracket_prefix(x) << COLOR_RESET << std::endl
-// #define FRC_ERROR(x)     std::cerr << FRC_PREFIX("ERROR",   COLOR_ERROR)    << strip_bracket_prefix(x) << COLOR_RESET << std::endl
-// #define FRC_SUCCESS(x)   std::cout << FRC_PREFIX("SUCCESS", COLOR_SUCCESS)  << strip_bracket_prefix(x) << COLOR_RESET << std::endl
-// #define FRC_HIGHLIGHT(x) std::cout << FRC_PREFIX("HIGHLIGHT", COLOR_HIGHLIGHT) << strip_bracket_prefix(x) << COLOR_RESET << std::endl
-// #define FRC_CRITICAL(x)  std::cerr << FRC_PREFIX("CRITICAL", COLOR_CRITICAL) << strip_bracket_prefix(x) << COLOR_RESET << std::endl
+// 自动翻译封装
+#define FRC_TRANSLATE(msg) Translation::autoTranslate(msg)
 
-// #if LOG_ENABLE_DEBUG
-//   #define DBG_INFO(x)  std::cout << FRC_PREFIX("DEBUG", COLOR_DEBUG) << strip_bracket_prefix(x) << COLOR_RESET << std::endl
-// #else
-//   #define DBG_INFO(x)
-// #endif
-
-// ✅ 日志宏定义（增强版，支持 << 表达式 + 自动去掉 [xxx]）
-#define FRC_INFO(x)      do { std::ostringstream _os; _os << x; std::cout << FRC_PREFIX("INFO", COLOR_INFO)     << strip_bracket_prefix(_os.str()) << COLOR_RESET << std::endl; } while(0)
-#define FRC_WARN(x)      do { std::ostringstream _os; _os << x; std::cout << FRC_PREFIX("WARN", COLOR_WARN)     << strip_bracket_prefix(_os.str()) << COLOR_RESET << std::endl; } while(0)
-#define FRC_ERROR(x)     do { std::ostringstream _os; _os << x; std::cerr << FRC_PREFIX("ERROR", COLOR_ERROR)   << strip_bracket_prefix(_os.str()) << COLOR_RESET << std::endl; } while(0)
-#define FRC_SUCCESS(x)   do { std::ostringstream _os; _os << x; std::cout << FRC_PREFIX("SUCCESS", COLOR_SUCCESS) << strip_bracket_prefix(_os.str()) << COLOR_RESET << std::endl; } while(0)
-#define FRC_HIGHLIGHT(x) do { std::ostringstream _os; _os << x; std::cout << FRC_PREFIX("HIGHLIGHT", COLOR_HIGHLIGHT) << strip_bracket_prefix(_os.str()) << COLOR_RESET << std::endl; } while(0)
-#define FRC_CRITICAL(x)  do { std::ostringstream _os; _os << x; std::cerr << FRC_PREFIX("CRITICAL", COLOR_CRITICAL) << strip_bracket_prefix(_os.str()) << COLOR_RESET << std::endl; } while(0)
+// 日志宏定义（增强版，支持 << 表达式 + 自动去掉 [xxx]）
+#define FRC_INFO(x)      do { std::ostringstream _os; _os << x; std::cout << FRC_PREFIX("INFO", COLOR_INFO)     << FRC_TRANSLATE(_os.str()) << COLOR_RESET << std::endl; } while(0)
+#define FRC_WARN(x)      do { std::ostringstream _os; _os << x; std::cout << FRC_PREFIX("WARN", COLOR_WARN)     << FRC_TRANSLATE(_os.str()) << COLOR_RESET << std::endl; } while(0)
+#define FRC_ERROR(x)     do { std::ostringstream _os; _os << x; std::cerr << FRC_PREFIX("ERROR", COLOR_ERROR)   << FRC_TRANSLATE(_os.str()) << COLOR_RESET << std::endl; } while(0)
+#define FRC_SUCCESS(x)   do { std::ostringstream _os; _os << x; std::cout << FRC_PREFIX("SUCCESS", COLOR_SUCCESS) << FRC_TRANSLATE(_os.str()) << COLOR_RESET << std::endl; } while(0)
+#define FRC_HIGHLIGHT(x) do { std::ostringstream _os; _os << x; std::cout << FRC_PREFIX("HIGHLIGHT", COLOR_HIGHLIGHT) << FRC_TRANSLATE(_os.str()) << COLOR_RESET << std::endl; } while(0)
+#define FRC_CRITICAL(x)  do { std::ostringstream _os; _os << x; std::cerr << FRC_PREFIX("CRITICAL", COLOR_CRITICAL) << FRC_TRANSLATE(_os.str()) << COLOR_RESET << std::endl; } while(0)
 
 #if LOG_ENABLE_DEBUG
-  #define DBG_INFO(x)    do { std::ostringstream _os; _os << x; std::cout << FRC_PREFIX("DEBUG", COLOR_DEBUG)   << strip_bracket_prefix(_os.str()) << COLOR_RESET << std::endl; } while(0)
+  #define DBG_INFO(x)    do { std::ostringstream _os; _os << x; std::cout << FRC_PREFIX("DEBUG", COLOR_DEBUG)   << FRC_TRANSLATE(_os.str()) << COLOR_RESET << std::endl; } while(0)
 #else
   #define DBG_INFO(x)
 #endif
