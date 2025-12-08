@@ -42,6 +42,7 @@ static const std::unordered_map<std::string, std::string> EN = {
     {"predefine:license_check_failed", "License check failed, exiting ..."},
     {"predefine:protection_key_restored", "WestLake protection key restored."},
     {"predefine:protection_key_lost", "WestLake protection key lost!"},
+    {"predefine:license_ok", "License OK, continue running ..."},
 };
 
 
@@ -83,6 +84,7 @@ static const std::unordered_map<std::string, std::string> ZH = {
     {"predefine:license_check_failed", "许可证检查失败，程序即将退出。"},
     {"predefine:protection_key_restored", "WestLake 保护密钥已恢复。"},
     {"predefine:protection_key_lost", "WestLake 保护密钥丢失！"},
+    {"predefine:license_ok", "许可证验证通过，继续运行..."},
 };
 } // namespace TranslationData
 
@@ -90,6 +92,8 @@ static const std::unordered_map<std::string, std::string> ZH = {
 
 
  
+
+
 
 
 
