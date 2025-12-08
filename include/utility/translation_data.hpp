@@ -60,40 +60,32 @@ static const std::unordered_map<std::string, std::string> ZH = {
 
     // ------- Added Sentences -------
     {"predefine:create_task_mocap",            "创建任务: 身外化身"},
-    {"predefine:loading_model",                "模型加载中...(时间较长，请耐心等待)"},
-    {"predefine:model_loading_complete",       "模型加载完成！"},
-    {"predefine:mocap_task_created",           "身外化身 创建完成！"},
+    {"predefine:loading_model",                "模型加载中(时间较长，请耐心等待)..."},
+    {"predefine:model_loading_complete",       "模型加载完成!"},
+    {"predefine:mocap_task_created",           "身外化身创建完成!"},
     {"predefine:waiting_mocap_publisher",      "正在等待客户端数据..."},
-    {"predefine:found_mocap_publisher",        "已收到客户端数据！"},
+    {"predefine:found_mocap_publisher",        "已收到客户端数据!"},
     {"predefine:current_active_task",          "当前激活任务: 身外化身"},
-    {"predefine:waiting_connect_robot",        "正在等待连接机器人..."},
-    {"predefine:connected_robot_success",      "成功连接机器人。"},
+    {"predefine:waiting_connect_robot",        "正在等待机器人连接..."},
+    {"predefine:connected_robot_success",      "机器人成功连接!"},
     {"predefine:enter_zero_torque",            "机器人进入零力矩状态。"},
     {"predefine:waiting_start_signal",         "正在等待启动(start)信号(请按遥控器start按钮)..."},
     {"predefine:press_z_exit",                 "按下键盘'z'键退出键盘监听。"},
     {"predefine:start_signal_received",        "已收到启动(start)信号。"},
-    {"predefine:moving_default_position",      "正在移动到默认姿态…"},
-    {"predefine:reached_default_position",     "已到达默认姿态。"},
-    {"predefine:waiting_btutton_a",             "正在等待按钮 A 信号(请按遥控器A按钮)…"},
-    {"predefine:button_a_received",            "已收到按钮 A 信号。"},
-    {"predefine:gamepad_x_press",              "按钮 X 按下，关闭跟随模式！"},
-    {"predefine:gamepad_x_release",            "按钮 X 松开，开启跟随模式！"},
+    {"predefine:moving_default_position",      "机器人正在移动到启动姿态..."},
+    {"predefine:reached_default_position",     "已到达启动姿态。"},
+    {"predefine:waiting_btutton_a",            "正在等待按钮 A 信号(请按遥控器A按钮)..."},
+    {"predefine:button_a_received",            "已收到按钮 A 信号，启动模型!"},
+    {"predefine:gamepad_x_press",              "按钮 X 按下，关闭跟随模式!"},
+    {"predefine:gamepad_x_release",            "按钮 X 松开，开启跟随模式!"},
     {"predefine:keyboard_listener_terminated", "键盘监听线程已结束。"},
-    {"predefine:robot_disconnected_lowstate_timeout", "机器人已断开连接（LowState 超时）！"},
-    {"predefine:protection_key_not_found", "未找到 WestLake 保护密钥。"},
-    {"predefine:license_check_failed", "许可证检查失败，程序即将退出。"},
-    {"predefine:protection_key_restored", "WestLake 保护密钥已恢复。"},
-    {"predefine:protection_key_lost", "WestLake 保护密钥丢失！"},
-    {"predefine:license_ok", "许可证验证通过，继续运行..."},
+    {"predefine:robot_disconnected_lowstate_timeout", "机器人已断开连接(LowState 超时)!"},
+    {"predefine:protection_key_not_found",     "未找到 WestLake 保护密钥。"},
+    {"predefine:license_check_failed",         "许可证检查失败，程序即将退出。"},
+    {"predefine:protection_key_restored",      "WestLake 保护密钥已恢复。"},
+    {"predefine:protection_key_lost",          "WestLake 保护密钥丢失!"},
+    {"predefine:license_ok",                   "许可证验证通过，继续运行..."},
 };
 } // namespace TranslationData
-
-
-
-
- 
-
-
-
 
 
