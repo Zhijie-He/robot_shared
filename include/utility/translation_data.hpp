@@ -75,7 +75,7 @@ static const std::unordered_map<std::string, std::string> ZH = {
     {"predefine:moving_default_position",      "机器人正在移动到启动姿态..."},
     {"predefine:reached_default_position",     "已到达启动姿态。"},
     {"predefine:waiting_btutton_a",            "正在等待按钮 A 信号(请按遥控器A按钮)..."},
-    {"predefine:button_a_received",            "已收到按钮 A 信号，启动模型!"},
+    {"predefine:button_a_received",            "已收到按钮 A 信号，启动模型(默认原地模式)!"},
     {"predefine:gamepad_x_press",              "按钮 X 按下，关闭跟随模式!"},
     {"predefine:gamepad_x_release",            "按钮 X 松开，开启跟随模式!"},
     {"predefine:keyboard_listener_terminated", "键盘监听线程已结束。"},
