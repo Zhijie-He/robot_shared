@@ -43,6 +43,9 @@ static const std::unordered_map<std::string, std::string> EN = {
     {"predefine:protection_key_restored", "WestLake protection key restored."},
     {"predefine:protection_key_lost", "WestLake protection key lost!"},
     {"predefine:license_ok", "License OK, continue running ..."},
+    { "predefine:try_deactivate_motion_service", "Try to deactivate the motion control-related service." },
+    { "predefine:release_mode_failed", "Failed to switch to Release Mode." },
+    { "predefine:release_mode_success", "ReleaseMode succeeded." },
 };
 
 
@@ -85,6 +88,9 @@ static const std::unordered_map<std::string, std::string> ZH = {
     {"predefine:protection_key_restored",      "WestLake 保护密钥已恢复。"},
     {"predefine:protection_key_lost",          "WestLake 保护密钥丢失!"},
     {"predefine:license_ok",                   "许可证验证通过，继续运行..."},
+    { "predefine:try_deactivate_motion_service", "尝试关闭与运动控制相关的服务。" },
+    { "predefine:release_mode_failed",          "切换到调试模式失败。" },
+    { "predefine:release_mode_success",         "成功切换到调试模式。" },
 };
 } // namespace TranslationData
 
