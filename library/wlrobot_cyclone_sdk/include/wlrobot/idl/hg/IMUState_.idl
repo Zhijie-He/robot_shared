@@ -1,0 +1,15 @@
+// IMUState_.idl
+module agile {
+  module msg {
+    module dds_ {
+      struct IMUState_ {
+        float accelerometer[3];       // 加速度  
+        float gyroscope[3];           // 陀螺仪
+        float quaternion[4];          // 四元数
+        float rpy[3];                 // 欧拉角
+        float temperature;            // IMU温度
+        uint64 timestamp;             // 时间戳
+      };
+    };
+  };
+};

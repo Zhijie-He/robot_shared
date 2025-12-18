@@ -1,0 +1,17 @@
+// MotorCmd_.idl
+module agile {
+  module msg {
+    module dds_ {
+      struct MotorCmd_ {
+        uint32 mode;                 // 工作模式(0x00：失能  0x02：使能)
+        float q;                     // 目标位置
+        float dq;                    // 目标速度
+        float tau;                   // 目标力矩
+        float kp;                    // 比例增益
+        float kd;                    // 微分增益
+      };
+    };
+  };
+};
+
+

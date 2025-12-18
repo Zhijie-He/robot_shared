@@ -1,0 +1,18 @@
+// LowState_.idl
+#include "IMUState_.idl"
+#include "MotorState_.idl"
+module agile {
+  module msg {
+    module dds_ {
+      struct LowState_ {
+        uint8 mode_pr;                // 机器人控制模式，预留
+        uint8 mode_machine;           // 机器人类型，预留
+        uint16 sequences;             // 序列号
+        MotorState_ motor_state[32];  // 全身关节状态数据
+        IMUState_ imu_state;          // 外置IMU(裆部)状态数据
+        uint8 wireless_remote[40];    // 遥控器数据，详情解析见5.2.2小节内容
+        uint32 crc;                   // crc校验码，未使用
+      };
+    };
+  };
+};

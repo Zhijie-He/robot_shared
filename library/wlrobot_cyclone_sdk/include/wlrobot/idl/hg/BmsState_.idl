@@ -1,0 +1,19 @@
+// BmsState_.idl
+module agile {
+  module msg {
+    module dds_ {
+      struct BmsState_ {
+        uint8 version[3];               // 版本号
+        uint8 error_status;             // 错误码
+        float voltage;                  // 电池电压(V)
+        float soc;                      // 电池soc(%)
+        float electricity;              // 电池电量C(库伦)
+        float elapsed_seconds;          // 电池运行时间S(秒)
+        int32 bat_temperature_0;        // 电池探头0温度(℃)
+        int32 bat_temperature_1;        // 电池探头1温度(℃)
+        float soh;                      // 电池健康程度soh(%)
+      };
+    };
+  };
+};                   
+ 

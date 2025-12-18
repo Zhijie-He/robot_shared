@@ -1,0 +1,15 @@
+// LowCmd_.idl
+#include "MotorCmd_.idl"
+module agile {
+  module msg {
+    module dds_ {
+      struct LowCmd_ {
+        uint8 mode_pr;               // 控制模式，预留
+        uint8 mode_machine;          // 机器人类型，预留
+        uint16 sequences;            // 序列号
+        MotorCmd_ motor_cmd[32];     // 全身关节控制指令
+        uint32 crc;                  // crc校验码，未使用
+      };
+    };
+  };
+};

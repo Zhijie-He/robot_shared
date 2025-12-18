@@ -1,0 +1,16 @@
+// MotorState_.idl
+module agile {
+  module msg {
+    module dds_ {
+      struct MotorState_ {
+        uint8 mode;                   // 工作模式
+        uint8 err_code;               // 电机故障码
+        uint8 resv[2];                // 预留
+        float q;                      // 当前位置 
+        float dq;                     // 当前速度
+        float tau_est;                // 当前力矩  
+        int32 temperature;            // 电机温度
+      };
+    };
+  };
+};

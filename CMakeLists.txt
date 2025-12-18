@@ -63,12 +63,24 @@ target_link_directories(robot_shared_unitree_sdk2 INTERFACE
 target_link_libraries(robot_shared_unitree_sdk2 INTERFACE unitree_sdk2)
 endif()
 
-# ========== Westlake Cyclone SDK ==========
+# ========== Custom Cyclone SDK ==========
+if(USE_CUSTOMCYCLONEDDSSDK)
+add_library(robot_shared_custom_cyclonedds_sdk INTERFACE)
+target_include_directories(robot_shared_custom_cyclonedds_sdk INTERFACE
+    ${CMAKE_CURRENT_SOURCE_DIR}/library/custom_cyclone_sdk/include
+)
+endif()
+
+# ========== Westlake cyclonedds SDK ==========
 if(USE_WLCYCLONEDDSSDK)
-add_library(robot_shared_westlake_cyclonedds_sdk INTERFACE)
-target_include_directories(robot_shared_westlake_cyclonedds_sdk INTERFACE
+file(GLOB_RECURSE WESTLAKE_CYCLONEDDS_SOURCES CONFIGURE_DEPENDS
+    ${CMAKE_CURRENT_SOURCE_DIR}/library/wlrobot_cyclone_sdk/src/*.cpp
+)
+add_library(robot_shared_westlake_cyclonedds_sdk STATIC ${WESTLAKE_CYCLONEDDS_SOURCES})
+target_include_directories(robot_shared_westlake_cyclonedds_sdk PUBLIC
     ${CMAKE_CURRENT_SOURCE_DIR}/library/wlrobot_cyclone_sdk/include
 )
+target_link_libraries(robot_shared_westlake_cyclonedds_sdk PRIVATE robot_shared_cyclonedds)
 endif()
 
 # ========== Westlake fastdds SDK ==========
