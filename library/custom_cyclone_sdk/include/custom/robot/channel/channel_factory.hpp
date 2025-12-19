@@ -55,19 +55,17 @@ public:
 
         dds_entity_t reader = dds_create_reader(participant_, topic, nullptr, nullptr);
         if (reader < 0) throw std::runtime_error("[ChannelFactory] Failed to create reader for " + name);
-        
+
         // ---- 等待 Publisher ----
         dds_set_status_mask(reader, DDS_SUBSCRIPTION_MATCHED_STATUS);
         std::cout << "[ChannelSubscriber] Waiting for publisher on " << name << " ..." << std::endl;
-        while (true) {
-            uint32_t status = 0;
-            (void)dds_get_status_changes(reader, &status);
-            if (status & DDS_SUBSCRIPTION_MATCHED_STATUS) {
-                std::cout << "[ChannelSubscriber] Publisher discovered for " << name << std::endl;
-                break;
-            }
-            std::this_thread::sleep_for(std::chrono::milliseconds(100));
+
+        uint32_t status = 0;
+        (void)dds_get_status_changes(reader, &status);
+        if (status & DDS_SUBSCRIPTION_MATCHED_STATUS) {
+            std::cout << "[ChannelSubscriber] Publisher discovered for " << name << std::endl;
         }
+        else std::cout << "[ChannelSubscriber] Publisher not discovered for " << name << std::endl;
 
         // 开线程轮询消息
         std::thread([reader, cb]() {
@@ -85,10 +83,8 @@ public:
                 dds_sleepfor(DDS_MSECS(10));
             }
         }).detach();
-
         return reader;
     }
-
 
 private:
     ChannelFactory() : inited_(false), participant_(0) {}
