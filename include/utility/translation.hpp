@@ -1,4 +1,5 @@
 #pragma once
+#include <regex>
 #include <string>
 #include "global_settings.hpp"
 #include "translation_data.hpp"
@@ -17,10 +18,43 @@ public:
         if (it != table.end())
             return it->second;
 
+        const auto& sub_table = (lang == Lang::EN) ? TranslationData::SUB_EN
+                                               : TranslationData::SUB_ZH;
+        static std::string replaced_it;
+        replaced_it = key;  // 用于最终返回
+        for (const auto& [k, v] : sub_table) {
+            size_t pos = replaced_it.find(k);
+            if (pos != std::string::npos) {
+                replaced_it.replace(pos, k.size(), v);
+                return replaced_it;
+            }
+        }
+
         // 未找到翻译就原样返回 key
         static std::string missing;
         missing = key;
         return missing;
+    }
+    //  get(key): 仅翻译 key，不含前缀逻辑
+    static const std::string& get_code(const std::string& key)
+    {
+        const auto& table = TranslationData::MARKER_CODE;
+        auto it = table.find(key);
+        if (it != table.end())
+            return it->second;
+
+        const auto& sub_table = TranslationData::SUB_MARKER_CODE;
+        static std::string code_it;
+        code_it = key;  // 用于最终返回
+        for (const auto& [k, v] : sub_table) {
+            size_t pos = code_it.find(k);
+            if (pos != std::string::npos) {
+                return v;
+            }
+        }
+
+        static const std::string empty;
+        return empty;
     }
 
     // autoTranslate(msg): 支持解析 [Prefix] key 并恢复前缀
@@ -48,6 +82,14 @@ public:
 
         // 翻译 key
         const std::string& translated = get(key);
+
+#if USE_WEBCTRL
+        const std::string& code_prefix = get_code(key);
+        if (!code_prefix.empty())
+            return code_prefix + " " + translated;
+        else
+            return translated;
+#endif
 
         // 若关闭前缀显示，则直接返回翻译后的内容
 #if LOG_USE_PREFIX
