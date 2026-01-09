@@ -129,7 +129,7 @@ static const std::unordered_map<std::string, std::string> ZH = {
 // English Translation Sub Table
 // ========================
 static const std::unordered_map<std::string, std::string> SUB_EN = {
-    {"predefine:emergency_stop",      "Emergency Stop! at "},
+    {"predefine:emergency_stop",                "Emergency Stop! at "},
     {"predefine:unknown_encryption_error",      "Unknown encryption error: "},
     {"predefine:encryption_error",              "Encryption error: "},
     {"predefine:failed_get_program_path",       "Failed to get program path: "},
@@ -138,9 +138,10 @@ static const std::unordered_map<std::string, std::string> SUB_EN = {
     {"predefine:failed_open_json_file",         "[Failed to open JSON file: "},
     {"predefine:failed_load_model",             "Failed to load model: "},
     {"predefine:load_xml_model_error",          "Load xml model error: "}, 
-    {"predefine:failed_create_inference_engine",    "Failed to create inference engine: "},
+    {"predefine:failed_create_inference_engine","Failed to create inference engine: "},
     {"predefine:unknown_robot_backend_type",    "Unknown robot backend type: "},
     {"predefine:inference_info",                ""},
+    {"predefine:inference_late_time",           ""},
 };
 
 // ========================
@@ -156,9 +157,10 @@ static const std::unordered_map<std::string, std::string> SUB_ZH = {
     {"predefine:failed_open_json_file",         "打开 JSON 文件失败："},
     {"predefine:failed_load_model",             "[加载模型失败："},
     {"predefine:load_xml_model_error",          "加载 XML 模型错误："},
-    {"predefine:failed_create_inference_engine",    "创建推理类型失败："},
+    {"predefine:failed_create_inference_engine","创建推理类型失败："},
     {"predefine:unknown_robot_backend_type",    "未知的机器人类型："},
     {"predefine:inference_info",                ""},
+    {"predefine:inference_late_time",           ""},
 };
 
 // ========================
