@@ -1,0 +1,15 @@
+// HandCmd_.idl
+module agile
+{
+    module msg
+    {
+        module dds_
+        {
+            @final
+            struct HandCmd_
+            {
+                float q[20];
+            };
+        };
+    };
+};

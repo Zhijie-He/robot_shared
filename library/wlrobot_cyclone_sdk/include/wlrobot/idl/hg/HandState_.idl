@@ -1,0 +1,14 @@
+module agile
+{
+    module msg
+    {
+        module dds_
+        {
+            @final
+            struct HandState_
+            {
+                float q[20];
+            };
+        };
+    };
+};
