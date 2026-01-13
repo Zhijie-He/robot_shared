@@ -149,10 +149,10 @@ void ErrorPrinter::printError(haspStatus status)
     StatusMap::const_iterator error = errorMap.find(status);
     if(error == errorMap.end())
         // cout<<"unknown error: "<<status<<endl;
-        FRC_ERROR("[ErrorPrinter.printError] predefine:unknown_encryption_error: " <<status);
+        FRC_ERROR("[ErrorPrinter.printError] predefine:unknown_encryption_error" <<status);
     else
         // cout<<error->second<<endl;
-        FRC_ERROR("[ErrorPrinter.printError] predefine:encryption_error:" << error->second);
+        FRC_ERROR("[ErrorPrinter.printError] predefine:encryption_error" << error->second);
 }
 
 const char* ErrorPrinter::getError(haspStatus status)
