@@ -54,13 +54,12 @@ static const std::unordered_map<std::string, std::string> EN = {
     {"predefine:model_not_running",             "Model process not running" },
     {"predefine:model_pid_invalid",             "Model PID invalid, no process found" },
     {"predefine:lowstate_crc_error",            "Lowstate CRC Error" },
-    {"predefine:no_new_mocap_message",          "No new message, use last message" },
+    {"predefine:no_mocap_data_available",       "No mocap data available, exiting!" },
     {"predefine:obs_contains_nan_or_inf",       "Observation contains nan or inf! Abort." },
     {"predefine:failed_create_dds_participant", "Failed to create DDS participant." },
     {"predefine:failed_create_dds_topic",       "Failed to create DDS topic." },
     {"predefine:failed_create_dds_reader",      "Failed to create DDS reader." }, 
-    {"predefine:failed_find_mocap_publisher",   "Failed to find mocap publisehr, exiting..." }, 
-    {"predefine:no_received_mocap_data",        "No received mocap data, exiting..." }, 
+    {"predefine:failed_find_mocap_data",        "Failed to find mocap data, exiting..." }, 
     {"predefine:failed_receive_lowstate",       "Failed to receive lowstate, exiting..." }, 
 };
 
@@ -115,13 +114,12 @@ static const std::unordered_map<std::string, std::string> ZH = {
     {"predefine:model_not_running",             "模型进程未运行"},
     {"predefine:model_pid_invalid",             "模型 PID 无效，未找到对应进程"},
     {"predefine:lowstate_crc_error",            "Lowstate CRC 校验错误"},
-    {"predefine:no_new_mocap_message",          "未收到新的消息，使用上一条消息"},
+    {"predefine:no_mocap_data_available",       "没有可用的mocap数据，退出程序……" },
     {"predefine:obs_contains_nan_or_inf",       "状态值包含 NaN 或 Inf，已中止。"},
     {"predefine:failed_create_dds_participant", "创建 DDS Participant 失败。"},
     {"predefine:failed_create_dds_topic",       "创建 DDS Topic 失败。"},
     {"predefine:failed_create_dds_reader",      "创建 DDS Reader 失败。"},
-    {"predefine:failed_find_mocap_publisher",   "未发现mocap的发布器，退出程序……" }, 
-    {"predefine:no_received_mocap_data",        "未接受到mocap数据，退出程序……" }, 
+    {"predefine:failed_find_mocap_data",        "未发现mocap的发布器，退出程序……" }, 
     {"predefine:failed_receive_lowstate",       "未接受到机器人状态数据，退出程序……" }, 
 };
 
@@ -173,13 +171,14 @@ static const std::unordered_map<std::string, std::string> SUB_ZH = {
 static const std::unordered_map<std::string, std::string> MARKER_CODE = {
     // ------- Response Code ------
     {"predefine:waiting_start_signal",                  "[0x630000]"},
+    {"predefine:press_z_exit",                          "[0x630000]"},
     {"predefine:start_signal_received",                 "[0x610000]"},
     {"predefine:button_a_received",                     "[0x610001]"},
     {"predefine:gamepad_x_press",                       "[0x610002]"},
     {"predefine:gamepad_x_release",                     "[0x610003]"},
     {"predefine:hold_position_active",                  "[0x610002]"},
     {"predefine:release_position_active",               "[0x610003]"},
-    
+
     // ------- ErrorCode ------
     {"predefine:license_check_failed",                  "[0x600000]"},
     {"predefine:robot_disconnected_lowstate_timeout",   "[0x600030]"},
@@ -188,9 +187,8 @@ static const std::unordered_map<std::string, std::string> MARKER_CODE = {
     {"predefine:model_not_running",                     "[0x600021]"},
     {"predefine:model_pid_invalid",                     "[0x600022]"},
     {"predefine:lowstate_crc_error",                    "[0x600031]"},
-    {"predefine:no_new_mocap_message",                  "[0x600032]"},
-    {"predefine:failed_find_mocap_publisher",           "[0x600033]"}, 
-    {"predefine:no_received_mocap_data",                "[0x600034]"}, 
+    {"predefine:no_mocap_data_available",               "[0x600032]"},
+    {"predefine:failed_find_mocap_data",                "[0x600033]"}, 
     {"predefine:failed_receive_lowstate",               "[0x600035]"}, 
     {"predefine:obs_contains_nan_or_inf",               "[0x600200]"},  // 问题：模型推理数据异常//解决办法：重新启动模型
     {"predefine:failed_create_dds_participant",         "[0x600201]"},  // 问题：创建dds通信失败 //解决办法：检查网络连接和dds服务
