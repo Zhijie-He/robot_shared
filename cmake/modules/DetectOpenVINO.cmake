@@ -1,0 +1,16 @@
+# robot_shared/cmake/modules/DetectOpenVINO.cmake
+include_guard(GLOBAL)
+include(${CMAKE_CURRENT_LIST_DIR}/../core/ColorMessage.cmake)
+
+if (USE_OPENVINO)
+    find_package(OpenVINO QUIET)
+    if (OpenVINO_FOUND)
+        color_message(STATUS cyan "[INFO] OpenVINO found: ${OpenVINO_VERSION}")
+        set(USE_OPENVINO ON)
+    else()
+        color_message(WARNING yellow "[WARNING] OpenVINO not found. Please install OpenVINO and set the path correctly.")
+        set(USE_OPENVINO OFF)
+    endif()
+else()
+    color_message(STATUS cyan "[INFO] OpenVINO manually disabled.")
+endif()
