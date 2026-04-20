@@ -83,7 +83,7 @@ public:
         // 翻译 key
         const std::string& translated = get(key);
 
-#if USE_WEBCTRL
+#ifdef USE_WEBCTRL
         const std::string& code_prefix = get_code(key);
         if (!code_prefix.empty())
             return code_prefix + " " + translated;
@@ -102,4 +102,3 @@ public:
 };
 
 #define LANG(key) Translation::get(key)
-

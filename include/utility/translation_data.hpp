@@ -36,6 +36,8 @@ static const std::unordered_map<std::string, std::string> EN = {
     {"predefine:press_z_exit",                 "Press 'z' to exit keyboard listener."},
     {"predefine:start_signal_received",        "Start signal received."},
     {"predefine:moving_default_position",      "Moving to default position ..."},
+    {"predefine:moving_crouch_position",       "Moving to crouch position ..."},
+    {"predefine:moving_zero_position",         "Moving to zero position ..."},
     {"predefine:reached_default_position",     "Reached default position."},
     {"predefine:waiting_button_a",             "Waiting for the Button A signal ..."},
     {"predefine:button_a_received",            "Button A signal received."},
@@ -100,6 +102,8 @@ static const std::unordered_map<std::string, std::string> ZH = {
     {"predefine:press_z_exit",                 "按下键盘'z'键退出键盘监听。"},
     {"predefine:start_signal_received",        "已收到启动(start)信号。"},
     {"predefine:moving_default_position",      "机器人正在移动到启动姿态..."},
+    {"predefine:moving_crouch_position",       "机器人正在移动到蹲伏姿态..."},
+    {"predefine:moving_zero_position",         "机器人正在移动到零力矩姿态..."},
     {"predefine:reached_default_position",     "已到达启动姿态。"},
     {"predefine:waiting_button_a",             "正在等待按钮 A 信号(请按遥控器A按钮)..."},
     {"predefine:button_a_received",            "已收到按钮 A 信号，启动模型(默认原地模式)!"},
@@ -135,7 +139,9 @@ static const std::unordered_map<std::string, std::string> ZH = {
 // English Translation Sub Table
 // ========================
 static const std::unordered_map<std::string, std::string> SUB_EN = {
-    {"predefine:emergency_stop",                "Emergency Stop! at "},
+    {"predefine:kill_model",                    "Kill Model! at "},
+    {"predefine:zero_stop",                     "Safety Stop! at "},
+    {"predefine:crouch_stop",                   "Crouch Stop! at "},
     {"predefine:unknown_encryption_error",      "Unknown encryption error: "},
     {"predefine:encryption_error",              "Encryption error: "},
     {"predefine:failed_get_program_path",       "Failed to get program path: "},
@@ -146,6 +152,7 @@ static const std::unordered_map<std::string, std::string> SUB_EN = {
     {"predefine:load_xml_model_error",          "Load xml model error: "}, 
     {"predefine:failed_create_inference_engine","Failed to create inference engine: "},
     {"predefine:unknown_robot_backend_type",    "Unknown robot backend type: "},
+    {"predefine:config_file_not_found",         "Config file not found: "},
     {"predefine:inference_info",                ""},
     {"predefine:inference_late_time",           ""},
 };
@@ -154,7 +161,9 @@ static const std::unordered_map<std::string, std::string> SUB_EN = {
 // Chinese Translation Sub Table
 // ========================
 static const std::unordered_map<std::string, std::string> SUB_ZH = {
-    {"predefine:emergency_stop",                "紧急停止，位于 "},
+    {"predefine:kill_model",                    "杀死模型，位于 "},
+    {"predefine:zero_stop",                     "安全停止，位于 "},
+    {"predefine:crouch_stop",                   "蹲伏停止，位于 "},
     {"predefine:unknown_encryption_error",      "未知的加密错误："},
     {"predefine:encryption_error",              "加密错误："},
     {"predefine:failed_get_program_path",       "获取程序路径失败："},
@@ -165,41 +174,43 @@ static const std::unordered_map<std::string, std::string> SUB_ZH = {
     {"predefine:load_xml_model_error",          "加载 XML 模型错误："},
     {"predefine:failed_create_inference_engine","创建推理类型失败："},
     {"predefine:unknown_robot_backend_type",    "未知的机器人类型："},
+    {"predefine:config_file_not_found",         "配置文件未找到："},
     {"predefine:inference_info",                ""},
     {"predefine:inference_late_time",           ""},
 };
 
 // ========================
 // Marker Code Table
-// 0x600000-0x600099 外设错误; 
+// 0x63或6011是指令回传客户端
+// 60100000-60100099 外设错误; 
 //      0-9 加密狗; 10-19 网络问题;  20-29 指令输入问题;  //30-39 机器人和动捕输入数据问题； 
-// 0x600100-0x600199 加载文件丢失或者错误;  
-// 0x600200-0x600299 代码加载逻辑问题;
+// 60100100-60100199 加载文件丢失或者错误;  
+// 60100200-60100299 代码加载逻辑问题;
 // ========================
 static const std::unordered_map<std::string, std::string> MARKER_CODE = {
     // ------- Response Code ------
     {"predefine:waiting_start_signal",                  "[0x630000]"},  // 标记model加载完成，等待start信号
     {"predefine:press_z_exit",                          "[0x630000]"},
-    {"predefine:start_signal_received",                 "[0x610000]"},
-    {"predefine:button_a_received",                     "[0x610001]"},
-    {"predefine:gamepad_x_press",                       "[0x610002]"},
-    {"predefine:gamepad_x_release",                     "[0x610003]"},
-    {"predefine:hold_position_active",                  "[0x610002]"},
-    {"predefine:release_position_active",               "[0x610003]"},
+    {"predefine:start_signal_received",                 "[60110000]"},
+    {"predefine:button_a_received",                     "[60110001]"},
+    {"predefine:gamepad_x_press",                       "[60110002]"},
+    {"predefine:gamepad_x_release",                     "[60110003]"},
+    {"predefine:hold_position_active",                  "[60110002]"},
+    {"predefine:release_position_active",               "[60110003]"},
 
     // ------- ErrorCode ------
-    {"predefine:license_check_failed",                  "[0x600000]"},  // 问题：未检测到加密狗              //解决办法：重插加密狗
-    {"predefine:robot_disconnected_lowstate_timeout",   "[0x600030]"},  // 问题：机器人断开连接              //解决办法：重启机器人，检查机器人硬件通信
-    {"predefine:protection_key_lost",                   "[0x600003]"},  // 问题：加密狗丢失                 //解决办法：重插加密狗
-    {"predefine:interface_not_found",                   "[0x600010]"},  // 问题：wifi接口没有发现           //解决办法：检查有线和无线网卡
-    {"predefine:lowstate_crc_error",                    "[0x600031]"},  // 问题：机器人机器人状态数据CRC异常  //解决办法：重启模型
-    {"predefine:no_mocap_data_available",               "[0x600032]"},  // 问题：未发现客户端数据            //解决办法：检查客户端的数据是否异常
-    {"predefine:failed_find_mocap_data",                "[0x600033]"},  // 问题：未发现客户端数据            //解决办法：检查客户端的数据是否异常
-    {"predefine:failed_receive_lowstate",               "[0x600035]"},  // 问题：未发现机器人状态数据         //解决办法：重启机器人，检查机器人硬件通信
-    {"predefine:obs_contains_nan_or_inf",               "[0x600200]"},  // 问题：模型推理数据异常            //解决办法：重新启动模型
-    {"predefine:failed_create_dds_participant",         "[0x600201]"},  // 问题：创建dds通信失败            //解决办法：检查网络连接和dds服务，然后重启机器人
-    {"predefine:failed_create_dds_topic",               "[0x600201]"},  // 问题：创建dds通信失败            //解决办法：检查网络连接和dds服务，然后重启机器人
-    {"predefine:failed_create_dds_reader",              "[0x600201]"},  // 问题：创建dds通信失败            //解决办法：检查网络连接和dds服务，然后重启机器人
+    {"predefine:license_check_failed",                  "[60100000]"},  // 问题：未检测到加密狗              //解决办法：重插加密狗
+    {"predefine:robot_disconnected_lowstate_timeout",   "[60100030]"},  // 问题：机器人断开连接              //解决办法：重启机器人，检查机器人硬件通信
+    {"predefine:protection_key_lost",                   "[60100003]"},  // 问题：加密狗丢失                 //解决办法：重插加密狗
+    {"predefine:interface_not_found",                   "[60100010]"},  // 问题：wifi接口没有发现           //解决办法：检查有线和无线网卡
+    {"predefine:lowstate_crc_error",                    "[60100031]"},  // 问题：机器人机器人状态数据CRC异常  //解决办法：重启模型
+    {"predefine:no_mocap_data_available",               "[60100032]"},  // 问题：未发现客户端数据            //解决办法：检查客户端的数据是否异常
+    {"predefine:failed_find_mocap_data",                "[60100033]"},  // 问题：未发现客户端数据            //解决办法：检查客户端的数据是否异常
+    {"predefine:failed_receive_lowstate",               "[60100035]"},  // 问题：未发现机器人状态数据         //解决办法：重启机器人，检查机器人硬件通信
+    {"predefine:obs_contains_nan_or_inf",               "[60100200]"},  // 问题：模型推理数据异常            //解决办法：重新启动模型
+    {"predefine:failed_create_dds_participant",         "[60100201]"},  // 问题：创建dds通信失败            //解决办法：检查网络连接和dds服务，然后重启机器人
+    {"predefine:failed_create_dds_topic",               "[60100201]"},  // 问题：创建dds通信失败            //解决办法：检查网络连接和dds服务，然后重启机器人
+    {"predefine:failed_create_dds_reader",              "[60100201]"},  // 问题：创建dds通信失败            //解决办法：检查网络连接和dds服务，然后重启机器人
 };
 
 // ========================
@@ -207,20 +218,23 @@ static const std::unordered_map<std::string, std::string> MARKER_CODE = {
 // ========================
 static const std::unordered_map<std::string, std::string> SUB_MARKER_CODE = {
     // ------- Response Code ------
-    {"predefine:emergency_stop",                        "[0x610005]"}, // 标记GAE紧急停止
-    {"predefine:inference_info",                        "[0x610010]"},
+    {"predefine:kill_model",                            "[60110004]"}, // 标记正常杀死模型
+    {"predefine:zero_stop",                             "[60110005]"}, // 标记GAE紧急停止
+    {"predefine:crouch_stop",                           "[60110006]"}, // 标记GAE蹲伏停止
+    {"predefine:inference_info",                        "[60110010]"},
 
     // ------- ErrorCode ------
-    {"predefine:unknown_encryption_error",              "[0x600001]"},  // 问题：加密狗错误                     //解决办法：重插加密狗
-    {"predefine:encryption_error",                      "[0x600002]"},  // 问题：加密狗错误                     //解决办法：重插加密狗
-    {"predefine:failed_get_program_path",               "[0x600100]"},  // 问题：失败获取当前脚本文件路径         //解决办法：检查脚本文件执行权限、文件是否存在及相关问题
-    {"predefine:unable_open_CycloneDDS_file",           "[0x600101]"},  // 问题：失败打开cyclonedds.xml文件     //解决办法：检查文件执行权限、文件是否存在及相关问题
-    {"predefine:unable_write_CycloneDDS_file",          "[0x600102]"},  // 问题：失败写入cyclonedds.xml文件     //解决办法：检查文件执行权限、文件是否存在及相关问题
-    {"predefine:failed_open_json_file",                 "[0x600103]"},  // 问题：失败打开teleopTask.josn文件    //解决办法：检查teleopTask.josn文件执行权限、文件是否存在及相关问题
-    {"predefine:failed_load_model",                     "[0x600104]"},  // 问题：失败加载model.engine文件       //解决办法：检查model.engine文件执行权限、文件是否存在及相关问题
-    {"predefine:load_xml_model_error",                  "[0x600105]"},  // 问题：加载的model的xml文件有问题     // 解决办法：检查机器人的model的xml文件执行权限、文件是否存在及相关问题
-    {"predefine:failed_create_inference_engine",        "[0x600204]"},  // 问题：失败创建tensorrt模型推理器     // 解决办法：检查本地是否有tensorrt库
-    {"predefine:unknown_robot_backend_type",            "[0x600205]"},  // 问题：未知的机器人类型               // 解决办法：检查机器人参数是否输入正确
-    {"predefine:inference_late_time",                   "[0x600206]"},  // 问题：产生推理延迟                   //解决办法：清除不必要的进程占用或者重新启动机器人
+    {"predefine:unknown_encryption_error",              "[60100003]"},  // 问题：加密狗错误                     //解决办法：重插加密狗
+    {"predefine:encryption_error",                      "[60100003]"},  // 问题：加密狗错误                     //解决办法：重插加密狗
+    {"predefine:failed_get_program_path",               "[60100100]"},  // 问题：失败获取当前脚本文件路径         //解决办法：检查脚本文件执行权限、文件是否存在及相关问题
+    {"predefine:unable_open_CycloneDDS_file",           "[60100101]"},  // 问题：失败打开cyclonedds.xml文件     //解决办法：检查文件执行权限、文件是否存在及相关问题
+    {"predefine:unable_write_CycloneDDS_file",          "[60100102]"},  // 问题：失败写入cyclonedds.xml文件     //解决办法：检查文件执行权限、文件是否存在及相关问题
+    {"predefine:failed_open_json_file",                 "[60100103]"},  // 问题：失败打开teleopTask.josn文件    //解决办法：检查teleopTask.josn文件执行权限、文件是否存在及相关问题
+    {"predefine:failed_load_model",                     "[60100104]"},  // 问题：失败加载model.engine文件       //解决办法：检查model.engine文件执行权限、文件是否存在及相关问题
+    {"predefine:load_xml_model_error",                  "[60100105]"},  // 问题：加载的model的xml文件有问题     // 解决办法：检查机器人的model的xml文件执行权限、文件是否存在及相关问题
+    {"predefine:config_file_not_found",                 "[60100106]"},  // 问题：yaml配置文件未找到             //解决办法：检查配置文件是否存在及相关问题
+    {"predefine:failed_create_inference_engine",        "[60100204]"},  // 问题：失败创建tensorrt模型推理器     // 解决办法：检查本地是否有tensorrt库
+    {"predefine:unknown_robot_backend_type",            "[60100205]"},  // 问题：未知的机器人类型               // 解决办法：检查机器人参数是否输入正确
+    {"predefine:inference_late_time",                   "[60100206]"},  // 问题：产生推理延迟                   //解决办法：清除不必要的进程占用或者重新启动机器人
 };
 } // namespace TranslationData
