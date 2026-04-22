@@ -1,0 +1,16 @@
+// BrainCoHandState_.idl
+module agile {
+    module msg {
+        module dds_ {
+            @final
+            struct BrainCoHandState_ {
+                uint32 sequences;
+                uint16 q[6];                 // 当前位置
+                uint16 dq[6];                // 当前速度
+                uint16 tau_est[6];           // 当前电流
+                uint8  status[6];            // 当前状态
+                uint8  resv[2];              // 预留
+            };  
+        };
+    };
+};

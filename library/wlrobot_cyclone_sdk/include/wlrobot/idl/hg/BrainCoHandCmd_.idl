@@ -1,0 +1,16 @@
+// BrainCoHandCmd.idl
+module agile 
+{
+    module msg 
+    {
+        module dds_ 
+        {
+            @final
+            struct BrainCoHandCmd_
+            {
+                uint32 sequences;         // 序列号，自增 
+                uint16 q[6];             // 目标位置
+            };  
+        };
+    };
+};
