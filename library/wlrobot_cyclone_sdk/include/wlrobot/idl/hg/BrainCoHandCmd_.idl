@@ -8,7 +8,8 @@ module agile
             @final
             struct BrainCoHandCmd_
             {
-                uint32 sequences;         // 序列号，自增 
+                uint16 sequences;        // 序列号
+                uint8 resv[2];           // 预留
                 uint16 q[6];             // 目标位置
             };  
         };

@@ -37,12 +37,13 @@ propvec &get_type_props<::agile::msg::dds_::BrainCoHandState_>() {
   props.clear();
 
   props.push_back(entity_properties_t(0, 0, false, bb_unset, extensibility::ext_final));  //root
-  props.push_back(entity_properties_t(1, 0, false, get_bit_bound<uint32_t>(), extensibility::ext_final, false));  //::sequences
-  props.push_back(entity_properties_t(1, 1, false, get_bit_bound<uint16_t>(), extensibility::ext_final, false));  //::q
-  props.push_back(entity_properties_t(1, 2, false, get_bit_bound<uint16_t>(), extensibility::ext_final, false));  //::dq
-  props.push_back(entity_properties_t(1, 3, false, get_bit_bound<uint16_t>(), extensibility::ext_final, false));  //::tau_est
-  props.push_back(entity_properties_t(1, 4, false, get_bit_bound<uint8_t>(), extensibility::ext_final, false));  //::status
-  props.push_back(entity_properties_t(1, 5, false, get_bit_bound<uint8_t>(), extensibility::ext_final, false));  //::resv
+  props.push_back(entity_properties_t(1, 0, false, get_bit_bound<uint16_t>(), extensibility::ext_final, false));  //::sequences
+  props.push_back(entity_properties_t(1, 1, false, get_bit_bound<uint8_t>(), extensibility::ext_final, false));  //::resv
+  props.push_back(entity_properties_t(1, 2, false, get_bit_bound<uint16_t>(), extensibility::ext_final, false));  //::q
+  props.push_back(entity_properties_t(1, 3, false, get_bit_bound<uint16_t>(), extensibility::ext_final, false));  //::dq
+  props.push_back(entity_properties_t(1, 4, false, get_bit_bound<uint16_t>(), extensibility::ext_final, false));  //::tau_est
+  props.push_back(entity_properties_t(1, 5, false, get_bit_bound<uint8_t>(), extensibility::ext_final, false));  //::status
+  props.push_back(entity_properties_t(1, 6, false, get_bit_bound<uint8_t>(), extensibility::ext_final, false));  //::resv1
 
   entity_properties_t::finish(props, keylist);
   props_end = props.data() + props.size();

@@ -37,8 +37,9 @@ propvec &get_type_props<::agile::msg::dds_::BrainCoHandCmd_>() {
   props.clear();
 
   props.push_back(entity_properties_t(0, 0, false, bb_unset, extensibility::ext_final));  //root
-  props.push_back(entity_properties_t(1, 0, false, get_bit_bound<uint32_t>(), extensibility::ext_final, false));  //::sequences
-  props.push_back(entity_properties_t(1, 1, false, get_bit_bound<uint16_t>(), extensibility::ext_final, false));  //::q
+  props.push_back(entity_properties_t(1, 0, false, get_bit_bound<uint16_t>(), extensibility::ext_final, false));  //::sequences
+  props.push_back(entity_properties_t(1, 1, false, get_bit_bound<uint8_t>(), extensibility::ext_final, false));  //::resv
+  props.push_back(entity_properties_t(1, 2, false, get_bit_bound<uint16_t>(), extensibility::ext_final, false));  //::q
 
   entity_properties_t::finish(props, keylist);
   props_end = props.data() + props.size();
