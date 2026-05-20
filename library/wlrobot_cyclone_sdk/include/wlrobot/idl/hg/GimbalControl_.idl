@@ -1,0 +1,11 @@
+// GimbalControl_.idl
+module agile {
+  module msg {
+    module dds_ {
+      struct GimbalControl_ {
+        int16 op_value[3];      // // 0-滚转，1-俯仰，2-航向
+      };
+    };
+  };
+};                   
+ 
