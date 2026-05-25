@@ -127,3 +127,15 @@ target_link_directories(robot_shared_yaml INTERFACE
 )
 target_link_libraries(robot_shared_yaml INTERFACE yaml-cpp)
 endif()
+
+# ========== GLFW ==========
+if(USE_GLFW)
+add_library(robot_shared_glfw INTERFACE)
+target_include_directories(robot_shared_glfw INTERFACE
+    ${CMAKE_CURRENT_SOURCE_DIR}/library/glfw/include
+)
+target_link_directories(robot_shared_glfw INTERFACE
+    ${CMAKE_CURRENT_SOURCE_DIR}/library/glfw/lib/${CURRENT_PLATFORM}
+)
+target_link_libraries(robot_shared_glfw INTERFACE glfw)
+endif()
