@@ -45,8 +45,6 @@ static const std::unordered_map<std::string, std::string> EN = {
     {"predefine:button_a_received",            "Button A signal received."},
     {"predefine:gamepad_x_press",              "Gamepad X on press, set flags to zeros!"},
     {"predefine:gamepad_x_release",            "Gamepad X on release, set flags to ones!"},
-    {"predefine:hold_position_active",         "Hold position active, The robot cannot move or turn!"},
-    {"predefine:release_position_active",      "Release position active, The robot can move or turn!"},
     {"predefine:keyboard_listener_terminated",  "Keyboard listening thread terminated"},
     {"predefine:robot_disconnected_lowstate_timeout",   "Robot disconnected (LowState timeout)!"},
     {"predefine:protection_key_not_found",      "WestLake protection key was not found"},
@@ -113,8 +111,6 @@ static const std::unordered_map<std::string, std::string> ZH = {
     {"predefine:button_a_received",            "已收到按钮 A 信号，启动模型(默认原地模式)!"},
     {"predefine:gamepad_x_press",              "按钮 X 按下，开启原地模式, 机器人不能位移和转向!"},
     {"predefine:gamepad_x_release",            "按钮 X 松开，开启跟随模式, 机器人可以位移和转向!"},
-    {"predefine:hold_position_active",         "开启原地模式, 机器人不能位移和转向!"},
-    {"predefine:release_position_active",      "开启跟随模式, 机器人可以位移和转向!"},
     {"predefine:keyboard_listener_terminated", "键盘监听线程已结束。"},
     {"predefine:robot_disconnected_lowstate_timeout", "机器人已断开连接(LowState 超时)!"},
     {"predefine:protection_key_not_found",     "未找到 WestLake 保护密钥。"},
@@ -196,13 +192,11 @@ static const std::unordered_map<std::string, std::string> SUB_ZH = {
 static const std::unordered_map<std::string, std::string> MARKER_CODE = {
     // ------- Response Code ------
     {"predefine:waiting_start_signal",                  "[0x630000]"},  // 标记model加载完成，等待start信号
-    {"predefine:press_z_exit",                          "[0x630000]"},
+    {"predefine:enter_zero_torque",                     "[0x630000]"},
     {"predefine:start_signal_received",                 "[60110000]"},
     {"predefine:button_a_received",                     "[60110001]"},
     {"predefine:gamepad_x_press",                       "[60110002]"},
     {"predefine:gamepad_x_release",                     "[60110003]"},
-    {"predefine:hold_position_active",                  "[60110002]"},
-    {"predefine:release_position_active",               "[60110003]"},
 
     // ------- ErrorCode ------
     {"predefine:license_check_failed",                  "[60100000]"},  // 问题：未检测到加密狗              //解决办法：重插加密狗
