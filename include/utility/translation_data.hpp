@@ -193,10 +193,6 @@ static const std::unordered_map<std::string, std::string> MARKER_CODE = {
     // ------- Response Code ------
     {"predefine:waiting_start_signal",                  "[0x630000]"},  // 标记model加载完成，等待start信号
     {"predefine:enter_zero_torque",                     "[0x630000]"},
-    {"predefine:start_signal_received",                 "[60110000]"},
-    {"predefine:button_a_received",                     "[60110001]"},
-    {"predefine:gamepad_x_press",                       "[60110002]"},
-    {"predefine:gamepad_x_release",                     "[60110003]"},
 
     // ------- ErrorCode ------
     {"predefine:license_check_failed",                  "[60100000]"},  // 问题：未检测到加密狗              //解决办法：重插加密狗
@@ -218,9 +214,6 @@ static const std::unordered_map<std::string, std::string> MARKER_CODE = {
 // ========================
 static const std::unordered_map<std::string, std::string> SUB_MARKER_CODE = {
     // ------- Response Code ------
-    {"predefine:kill_model",                            "[60110004]"}, // 标记正常杀死模型
-    {"predefine:zero_stop",                             "[60110005]"}, // 标记GAE紧急停止
-    {"predefine:crouch_stop",                           "[60110006]"}, // 标记GAE蹲伏停止
     {"predefine:inference_info",                        "[60110010]"},
 
     // ------- ErrorCode ------
