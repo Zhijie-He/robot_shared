@@ -193,7 +193,9 @@ static const std::unordered_map<std::string, std::string> MARKER_CODE = {
     // ------- Response Code ------
     {"predefine:waiting_start_signal",                  "[0x630000]"},  // 标记model加载完成，等待start信号
     {"predefine:enter_zero_torque",                     "[0x630000]"},
-
+    {"predefine:gamepad_x_press",                       "[60110002]"},
+    {"predefine:gamepad_x_release",                     "[60110003]"},
+    
     // ------- ErrorCode ------
     {"predefine:license_check_failed",                  "[60100000]"},  // 问题：未检测到加密狗              //解决办法：重插加密狗
     {"predefine:robot_disconnected_lowstate_timeout",   "[60100030]"},  // 问题：机器人断开连接              //解决办法：重启机器人，检查机器人硬件通信
