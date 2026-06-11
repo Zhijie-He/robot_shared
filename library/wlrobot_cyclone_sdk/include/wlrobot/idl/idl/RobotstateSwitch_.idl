@@ -1,0 +1,12 @@
+//RobotstateSwitch_.idl
+module agile {
+    module msg {
+        module dds_ {
+            @final
+            struct RobotstateSwitch_ {
+                uint8    switch_mode;   // 切换目标状态 WORKTYPE
+                uint8    resv[3];       // 预留
+            };
+        };
+    };
+};

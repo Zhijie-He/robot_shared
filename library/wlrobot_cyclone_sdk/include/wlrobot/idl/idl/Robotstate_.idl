@@ -1,0 +1,12 @@
+//Robotstate_.idl
+module agile {
+    module msg {
+        module dds_ {
+            struct Robotstate_ {
+                uint8    mode;     // 状态
+                uint8    err_code; // 异常（预留）
+                uint8    resv[2];  // 预留
+            };
+        };
+    };
+};
