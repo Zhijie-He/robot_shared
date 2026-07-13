@@ -139,3 +139,15 @@ target_link_directories(robot_shared_glfw INTERFACE
 )
 target_link_libraries(robot_shared_glfw INTERFACE glfw)
 endif()
+
+# ========== OrinDec ==========
+if(USE_ORINDEC)
+add_library(robot_shared_orindec INTERFACE)
+target_include_directories(robot_shared_orindec INTERFACE
+    ${CMAKE_CURRENT_SOURCE_DIR}/library/orindec/include
+)
+target_link_directories(robot_shared_orindec INTERFACE
+    ${CMAKE_CURRENT_SOURCE_DIR}/library/orindec/lib/${CURRENT_PLATFORM}
+)
+target_link_libraries(robot_shared_orindec INTERFACE orindec)
+endif()
