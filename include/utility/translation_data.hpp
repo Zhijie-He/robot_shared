@@ -55,6 +55,7 @@ static const std::unordered_map<std::string, std::string> EN = {
     {"predefine:try_deactivate_motion_service", "Try to deactivate the motion control-related service." },
     {"predefine:release_mode_failed",           "Failed to switch to Release Mode." },
     {"predefine:release_mode_success",          "ReleaseMode succeeded." },
+    {"predefine:model_ready",                   "The model is ready." },
     {"predefine:interface_not_found",           "interface not found, retrying in 2 seconds..." },
     {"predefine:model_not_running",             "Model process not running" },
     {"predefine:model_pid_invalid",             "Model PID invalid, no process found" },
@@ -121,6 +122,7 @@ static const std::unordered_map<std::string, std::string> ZH = {
     {"predefine:try_deactivate_motion_service",     "尝试关闭与运动控制相关的服务。" },
     {"predefine:release_mode_failed",           "切换到调试模式失败。" },
     {"predefine:release_mode_success",          "成功切换到调试模式。" },
+    {"predefine:model_ready",                   "模型已经准备就绪。" },
     {"predefine:interface_not_found",           "未找到网络接口，2 秒后重试……"},
     {"predefine:model_not_running",             "模型进程未运行"},
     {"predefine:model_pid_invalid",             "模型 PID 无效，未找到对应进程"},
@@ -183,18 +185,26 @@ static const std::unordered_map<std::string, std::string> SUB_ZH = {
 
 // ========================
 // Marker Code Table
-// 0x63或6011是指令回传客户端
+// 6011是遥控器指令回传客户端，0x63或6012是机器人状态现实
 // 60100000-60100099 外设错误; 
 //      0-9 加密狗; 10-19 网络问题;  20-29 指令输入问题;  //30-39 机器人和动捕输入数据问题； 
 // 60100100-60100199 加载文件丢失或者错误;  
 // 60100200-60100299 代码加载逻辑问题;
+// 6012**** 特殊错误码处理;
 // ========================
 static const std::unordered_map<std::string, std::string> MARKER_CODE = {
     // ------- Response Code ------
-    {"predefine:waiting_start_signal",                  "[0x630000]"},  // 标记model加载完成，等待start信号
-    {"predefine:enter_zero_torque",                     "[0x630000]"},
     {"predefine:gamepad_x_press",                       "[60110002]"},
     {"predefine:gamepad_x_release",                     "[60110003]"},
+    {"predefine:waiting_mocap_publisher",               "[60120002]"},
+    {"predefine:waiting_mocap_hands_publisher",         "[60120003]"},
+    {"predefine:first_mocap_data_received",             "[60120004]"},
+    {"predefine:first_mocap_hands_data_received",       "[60120005]"},
+    {"predefine:release_mode_success",                  "[60120006]"},  // 调试模式
+    {"predefine:model_ready",                           "[60120007]"},  // 模型已准备
+    {"predefine:enter_zero_torque",                     "[60120008]"},
+    {"predefine:reached_default_position",              "[60120009]"},
+    {"predefine:button_a_received",                     "[60120010]"},
     
     // ------- ErrorCode ------
     {"predefine:license_check_failed",                  "[60100000]"},  // 问题：未检测到加密狗              //解决办法：重插加密狗
@@ -217,6 +227,8 @@ static const std::unordered_map<std::string, std::string> MARKER_CODE = {
 static const std::unordered_map<std::string, std::string> SUB_MARKER_CODE = {
     // ------- Response Code ------
     {"predefine:inference_info",                        "[60110010]"},
+    {"predefine:kill_model",                            "[60120012]"},
+    {"predefine:crouch_stop",                           "[60120013]"},
 
     // ------- ErrorCode ------
     {"predefine:unknown_encryption_error",              "[60100003]"},  // 问题：加密狗错误                     //解决办法：重插加密狗
@@ -230,6 +242,6 @@ static const std::unordered_map<std::string, std::string> SUB_MARKER_CODE = {
     {"predefine:config_file_not_found",                 "[60100106]"},  // 问题：yaml配置文件未找到             //解决办法：检查配置文件是否存在及相关问题
     {"predefine:failed_create_inference_engine",        "[60100204]"},  // 问题：失败创建tensorrt模型推理器     // 解决办法：检查本地是否有tensorrt库
     {"predefine:unknown_robot_backend_type",            "[60100205]"},  // 问题：未知的机器人类型               // 解决办法：检查机器人参数是否输入正确
-    {"predefine:inference_late_time",                   "[60100206]"},  // 问题：产生推理延迟                   //解决办法：清除不必要的进程占用或者重新启动机器人
+    {"predefine:inference_late_time",                   "[60120001]"},  // 问题：产生推理延迟                   //解决办法：清除不必要的进程占用或者重新启动机器人
 };
 } // namespace TranslationData
