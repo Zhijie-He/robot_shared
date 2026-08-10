@@ -194,6 +194,8 @@ static const std::unordered_map<std::string, std::string> SUB_ZH = {
 // ========================
 static const std::unordered_map<std::string, std::string> MARKER_CODE = {
     // ------- Response Code ------
+    {"predefine:waiting_start_signal",                  "[0x630000]"},  // 标记model加载完成，等待start信号
+    {"predefine:enter_zero_torque",                     "[0x630000]"},
     {"predefine:gamepad_x_press",                       "[60110002]"},
     {"predefine:gamepad_x_release",                     "[60110003]"},
     {"predefine:waiting_mocap_publisher",               "[60120002]"},
