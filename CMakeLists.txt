@@ -14,6 +14,14 @@ target_include_directories(robot_shared_eigen INTERFACE
 )
 endif()
 
+# ========== HTTP (header-only) ==========
+if(USE_HTTP)
+add_library(robot_shared_http INTERFACE)
+target_include_directories(robot_shared_http INTERFACE
+    ${CMAKE_CURRENT_SOURCE_DIR}/library/cpp-httplib
+)
+endif()
+
 # ========== Mujoco ==========
 if(USE_MUJOCO)
 add_library(robot_shared_mujoco INTERFACE)
@@ -151,3 +159,4 @@ target_link_directories(robot_shared_orindec INTERFACE
 )
 target_link_libraries(robot_shared_orindec INTERFACE orindec)
 endif()
+
