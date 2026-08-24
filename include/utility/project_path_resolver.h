@@ -15,6 +15,15 @@ inline std::string getPath(const std::string& subpath = "")
         if (std::filesystem::exists(installRoot))
             return (installRoot / subpath).lexically_normal().string();
     }
+
+    // ★ Added: When /proc/self/exe is unavailable (e.g., with memfd), allow the caller to specify the deploy root directory via an environment variable.
+    const char* envHome = std::getenv("POLICY_DEPLOY_HOME");
+    if (envHome && envHome[0] != '\0') {
+        auto envRoot = std::filesystem::path(envHome).lexically_normal();
+        if (std::filesystem::exists(envRoot))
+            return (envRoot / subpath).lexically_normal().string();
+    }
+
 #ifdef PROJECT_SOURCE_DIR
     return (std::filesystem::path(PROJECT_SOURCE_DIR) / subpath).lexically_normal().string();
 #else
