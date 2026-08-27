@@ -1,0 +1,26 @@
+#ifndef SBER_IDL_MOTOR__IDL_
+#define SBER_IDL_MOTOR__IDL_
+
+#include "Time_.idl"
+
+module hal2_interfaces {
+  module msg {
+    module dds_ {
+      struct Motor_ {
+        builtin_interfaces::msg::dds_::Time_ timestamp_state;
+
+        float position;
+        float velocity;
+        float torque;
+        float current;
+        float temp_driver;
+        float temp_mosfet;
+
+        uint8 status;
+        uint32 hw_error;
+      };
+    };
+  };
+};
+
+#endif

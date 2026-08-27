@@ -1,0 +1,18 @@
+#ifndef SBER_IDL_MIT_COMMAND__IDL_
+#define SBER_IDL_MIT_COMMAND__IDL_
+
+module hal2_interfaces {
+  module msg {
+    module dds_ {
+      struct MITCommand_ {
+        float position;
+        float velocity;
+        float torque;
+        float kp;
+        float kd;
+      };
+    };
+  };
+};
+
+#endif

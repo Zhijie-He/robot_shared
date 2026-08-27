@@ -104,6 +104,18 @@ target_include_directories(robot_shared_westlake_fastdds_sdk PUBLIC
 target_link_libraries(robot_shared_westlake_fastdds_sdk PRIVATE robot_shared_fastdds)
 endif()
 
+# ========== Sber cyclonedds SDK ==========
+if(USE_SBERCYCLONEDDSSDK)
+file(GLOB_RECURSE SBER_CYCLONEDDS_SOURCES CONFIGURE_DEPENDS
+    ${CMAKE_CURRENT_SOURCE_DIR}/library/sber_cyclone_sdk/src/*.cpp
+)
+add_library(robot_shared_sber_cyclonedds_sdk STATIC ${SBER_CYCLONEDDS_SOURCES})
+target_include_directories(robot_shared_sber_cyclonedds_sdk PUBLIC
+    ${CMAKE_CURRENT_SOURCE_DIR}/library/sber_cyclone_sdk/include
+)
+target_link_libraries(robot_shared_sber_cyclonedds_sdk PRIVATE robot_shared_cyclonedds)
+endif()
+
 # ========== Hasp Encryption SDK ==========
 if(USE_ENCRYPTION)
 file(GLOB_RECURSE HASP_SOURCES CONFIGURE_DEPENDS

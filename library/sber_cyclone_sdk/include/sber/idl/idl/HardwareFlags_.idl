@@ -1,0 +1,16 @@
+#ifndef SBER_IDL_HARDWARE_FLAGS__IDL_
+#define SBER_IDL_HARDWARE_FLAGS__IDL_
+
+module hal2_interfaces {
+  module msg {
+    module dds_ {
+      struct HardwareFlags_ {
+        boolean is_calibrated;
+        boolean is_enabled_motors;
+        uint8 error_code;
+      };
+    };
+  };
+};
+
+#endif

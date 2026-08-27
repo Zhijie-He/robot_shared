@@ -1,0 +1,19 @@
+#ifndef SBER_IDL_ROBOT_COMMAND35__IDL_
+#define SBER_IDL_ROBOT_COMMAND35__IDL_
+
+#include "Header_.idl"
+#include "MITCommand_.idl"
+
+module hal2_interfaces {
+  module msg {
+    module dds_ {
+      struct RobotCommand35_ {
+        std_msgs::msg::dds_::Header_ header;
+        MITCommand_ cmd[35];
+        uint8 mode;
+      };
+    };
+  };
+};
+
+#endif

@@ -1,0 +1,25 @@
+#ifndef SBER_IDL_IMU__IDL_
+#define SBER_IDL_IMU__IDL_
+
+#include "Time_.idl"
+
+module hal2_interfaces {
+  module msg {
+    module dds_ {
+      struct IMU_ {
+        builtin_interfaces::msg::dds_::Time_ gyro_timestamp;
+        float gyro[3];
+
+        builtin_interfaces::msg::dds_::Time_ accel_timestamp;
+        float accel[3];
+
+        builtin_interfaces::msg::dds_::Time_ quaternion_timestamp;
+        float quaternion[4];
+
+        uint8 status;
+      };
+    };
+  };
+};
+
+#endif

@@ -1,0 +1,26 @@
+#ifndef SBER_IDL_ROBOT_STATE__IDL_
+#define SBER_IDL_ROBOT_STATE__IDL_
+
+#include "Header_.idl"
+#include "IMU_.idl"
+#include "HardwareFlags_.idl"
+#include "Motor_.idl"
+
+module hal2_interfaces {
+  module msg {
+    module dds_ {
+      struct RobotState_ {
+        std_msgs::msg::dds_::Header_ header;
+
+        uint8 status;
+        uint8 state;
+
+        IMU_ imu;
+        HardwareFlags_ hardware_flags;
+        sequence<Motor_> actuators_state;
+      };
+    };
+  };
+};
+
+#endif
