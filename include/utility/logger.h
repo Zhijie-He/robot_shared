@@ -468,7 +468,7 @@ inline void log_to_file(std::string message, bool force_flush = false) {
 #else
 
 #define FRC_PREFIX(level, color) \
-  color "[" level "] "
+  color "[" level " " << current_time_str() << "] "
 
 #endif
 
